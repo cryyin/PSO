@@ -3,10 +3,22 @@
 
 #include "pch.h"
 #include <iostream>
+#include<ctime>
+#define N 10
+using namespace std;
+double gBest;
 
 int main()
 {
     std::cout << "你抽卡必蓝天白云\n"; 
+	double v = 0.0;
+	double x = 0.0;
+	for (int i = 0; i < N; i++)
+	{
+		srand((int)time(NULL));
+		v = rand() % 200 - 100;
+
+	}
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
