@@ -1,4 +1,7 @@
 #pragma once
+#include<ctime>
+#include<iostream>
+using namespace std;
 class Particle
 {
 public:
@@ -12,12 +15,13 @@ public:
 	double getVelocity();
 	double getpBestLocation();
 	double getpBestValue();
+	void UpdatePandV(double gBest);
 protected:
 	double location;
 	double velocity;
 	double pBestLocation;
 	double pBestValue;
-
+	
 
 };
 
