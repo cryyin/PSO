@@ -11,14 +11,14 @@ double Function::workOut(Particle particle)
 	double p, v,Value;
 	p = particle.getLocation();
 	v = particle.getVelocity();
-	Value = p * p;
+	Value = fabs(p);
 	return Value;
 }
 
 double Function::workOut(double p)
 {
 	double Value;
-	Value = p * p;
+	Value = fabs(p);
 	return Value;
 }
 

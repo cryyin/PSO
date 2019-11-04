@@ -10,19 +10,19 @@
 #define LoopNum 300
 #define Accuracy 0.0000000001
 using namespace std;
-
-
+double gBest = 1000.0;
+double gBestTemp = 1000.0;
 int main()
 {
     std::cout << "你抽卡必蓝天白云\n"; 
 	double v = 0.0;
 	double x = 0.0;
 	Particle particle[N];
-	double gBest = 1000.0;
+	
 	srand((int)time(NULL));
 	for (int i = 0; i < N; i++)
 	{
-		v = rand() % 200 + rand() % 10 / 10.0 + rand() % 10 / 100.0 + rand() % 10 / 1000.0 - 100;
+		v = (rand() % 200 + rand() % 10 / 10.0 + rand() % 10 / 100.0 + rand() % 10 / 1000.0 - 100)/2;
 		cout << "v=" << v << endl;
 		x = rand() % 200 + rand() % 10 / 10.0 + rand() % 10 / 100.0 + rand() % 10 / 1000.0 - 100;
 		cout << "x=" << x << endl;
@@ -33,6 +33,7 @@ int main()
 	{
 		double Value;
 		int judge = 0;
+		
 		for (int j = 0; j < N; j++)
 		{
 			Value = Function::workOut(particle[j]);
@@ -41,9 +42,15 @@ int main()
 				particle[j].setpBest(particle[j].getLocation());
 			}
 			particle[j].UpdatePandV(gBest);
-
+			
 		}
-		gBest = Function::FindgBest(&particle[0]);
+		gBestTemp = Function::FindgBest(&particle[0]);
+		if (Function::workOut(gBestTemp) < Function::workOut(gBest))
+		{
+			gBest = gBestTemp;
+		}
+		
+		/*
 		for (int k = 0; k < N; k++)
 		{
 			if ((Function::workOut(particle[k].getpBestLocation()) - Function::workOut(gBest)) < Accuracy) {
@@ -53,7 +60,7 @@ int main()
 		if (judge==N)
 		{
 			break;
-		}
+		}*/
 	}
 	cout << "gBest:" << gBest << endl;
 }
