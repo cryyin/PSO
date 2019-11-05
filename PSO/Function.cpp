@@ -11,21 +11,21 @@ double Function::workOut(Particle particle)
 	double p, v,Value;
 	p = particle.getLocation();
 	v = particle.getVelocity();
-	Value = fabs(p);
+	Value = p*p;
 	return Value;
 }
 
 double Function::workOut(double p)
 {
 	double Value;
-	Value = fabs(p);
+	Value = p*p;
 	return Value;
 }
 
 double Function::FindgBest(Particle * particle)
 {
 	Particle *bestparticle = particle;
-	for (int i = 0; i < N; i++)
+	for (int i = 0; i < Dim; i++)
 	{
 		if (workOut((particle + i)->getpBestLocation()) < workOut(bestparticle->getpBestLocation())) {
 			bestparticle = particle + i;

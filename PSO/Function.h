@@ -1,6 +1,6 @@
 #pragma once
 #include"Particle.h"
-#define N 10
+#define Dim 10
 class Function
 {
 public:

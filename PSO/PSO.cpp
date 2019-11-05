@@ -6,9 +6,10 @@
 #include<ctime>
 #include"Particle.h"
 #include"Function.h"
-#define N 10
-#define LoopNum 300
-#define Accuracy 0.0000000001
+#define Dim 10
+#define Num 20
+#define LoopNum 100
+#define Accuracy 0.01
 using namespace std;
 double gBest = 1000.0;
 double gBestTemp = 1000.0;
@@ -17,24 +18,28 @@ int main()
     std::cout << "你抽卡必蓝天白云\n"; 
 	double v = 0.0;
 	double x = 0.0;
-	Particle particle[N];
+	Particle particle[Num][Dim];
 	
 	srand((int)time(NULL));
-	for (int i = 0; i < N; i++)
+	for (int j = 0; j < Num; j++)
 	{
-		v = (rand() % 200 + rand() % 10 / 10.0 + rand() % 10 / 100.0 + rand() % 10 / 1000.0 - 100)/2;
-		cout << "v=" << v << endl;
-		x = rand() % 200 + rand() % 10 / 10.0 + rand() % 10 / 100.0 + rand() % 10 / 1000.0 - 100;
-		cout << "x=" << x << endl;
-		particle[i].setLocation(x);
-		particle[i].setVelocity(v);
+		for (int i = 0; i < Dim; i++)
+		{
+			v = (rand() % 200 + rand() % 10 / 10.0 + rand() % 10 / 100.0 + rand() % 10 / 1000.0 - 100) / 2;
+			cout << "v=" << v << endl;
+			x = rand() % 200 + rand() % 10 / 10.0 + rand() % 10 / 100.0 + rand() % 10 / 1000.0 - 100;
+			cout << "x=" << x << endl;
+			particle[j][i].setLocation(x);
+			particle[j][i].setVelocity(v);
+		}
 	}
+	
 	for (int i = 0; i < LoopNum; i++)
 	{
 		double Value;
 		int judge = 0;
 		
-		for (int j = 0; j < N; j++)
+		for (int j = 0; j < Dim; j++)
 		{
 			Value = Function::workOut(particle[j]);
 			if (Value< Function::workOut(particle[j].getpBestLocation()))
@@ -50,17 +55,21 @@ int main()
 			gBest = gBestTemp;
 		}
 		
-		/*
-		for (int k = 0; k < N; k++)
+		
+		for (int k = 0; k < Dim; k++)
 		{
 			if ((Function::workOut(particle[k].getpBestLocation()) - Function::workOut(gBest)) < Accuracy) {
 				judge++;
 			}
 		}
-		if (judge==N)
+		if (judge==Dim)
 		{
 			break;
-		}*/
+		}
+		else
+		{
+			judge = 0;
+		}
 	}
 	cout << "gBest:" << gBest << endl;
 }
