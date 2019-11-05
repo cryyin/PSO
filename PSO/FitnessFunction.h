@@ -6,7 +6,9 @@
 
 #define PI 3.1415926
 #define Dim 10
-
+/*
+15种不同的函数
+*/
 
 double FitnessFunction1(Particle& particle);
 double FitnessFunction2(Particle& particle);
@@ -250,6 +252,41 @@ double FitnessFunction13(Particle& particle)
 	fitness = 0.1*(sin(3 * PI*particle.position_[0])*sin(3 * PI*particle.position_[0]) + sum1 + (particle.position_[Dim-1] - 1)*(particle.position_[Dim-1] - 1)*(1 + pow(sin(2 * PI*particle.position_[Dim-1]), 2))) + sum2;
 
 
+	return fitness;
+
+}
+
+double FitnessFunction14(Particle& particle)
+
+{
+	double fitness = 0.0;
+	double sum1 = 0.0;
+	double sum2 = 0.0;
+	for (int i = 0; i < 2; i++)
+	{
+		sum1 += pow((particle.position_[i] - 2), 6);
+	}
+	for (int j = 0; j < 25; j++)
+	{
+		sum2 += (1.0 / (j + 1.0 + sum1));
+	}
+	fitness = 1.0 / (1.0 / 500 + sum2);
+
+	return fitness;
+
+}
+
+double FitnessFunction15(Particle& particle)
+
+{
+	double fitness = 0.0;
+	double sum1 = 0.0;
+	double sum2 = 0.0;
+	for (int i = 0; i <11; i++)
+	{
+		sum1 += (2- particle.position_[0]*(1+ particle.position_[1])/(1+ particle.position_[2]+ particle.position_[3]));
+	}
+	fitness = pow(sum1, 2);
 	return fitness;
 
 }
